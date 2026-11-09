@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -65,7 +66,7 @@ fun TelaLoginAdm(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    Icons.Default.Lock,
+                    if (uiState.modoAdm) Icons.Default.Lock else Icons.Default.Person,
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(36.dp)
