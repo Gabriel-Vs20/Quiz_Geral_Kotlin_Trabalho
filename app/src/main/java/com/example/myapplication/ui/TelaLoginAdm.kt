@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -80,7 +81,7 @@ fun TelaLoginAdm(
                 fontSize = 30.sp
             )
             Text(
-                "ÁREA DO ADMINISTRADOR",
+                if (uiState.modoAdm) "ÁREA DO ADMINISTRADOR" else "ÁREA DO USUÁRIO",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF6B7A74)
@@ -124,6 +125,20 @@ fun TelaLoginAdm(
                 modifier = Modifier.fillMaxWidth().height(55.dp),
                 shape = RoundedCornerShape(12.dp)
             ) { Text("Entrar", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp) }
+
+            Spacer(modifier = Modifier.padding(6.dp))
+
+            OutlinedButton(
+                onClick = { viewModel.onAlternarModo() },
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF009739)),
+                modifier = Modifier.fillMaxWidth().height(50.dp),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    if (uiState.modoAdm) "Trocar para usuário" else "Trocar para administrador",
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
         }
     }

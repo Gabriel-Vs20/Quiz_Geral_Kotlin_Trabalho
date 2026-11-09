@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.update
 data class LoginAdmUiState(
     val usuario: String = "",
     val senha: String = "",
-    val erro: String = ""
+    val erro: String = "",
+    val modoAdm: Boolean = true
 )
 
 class LoginAdmViewModel : ViewModel() {
@@ -28,9 +29,17 @@ class LoginAdmViewModel : ViewModel() {
         _uiState.update { it.copy(senha = valor) }
     }
 
-    // devolve true quando pode entrar
+    fun onAlternarModo() {
+        _uiState.update { it.copy(usuario = "", senha = "", erro = "", modoAdm = !it.modoAdm) }
+    }
+
+    // devolve true quando pode entrar na área do administrador
     fun onEntrar(): Boolean {
         val state = _uiState.value
+        if (!state.modoAdm) {
+            _uiState.update { it.copy(erro = "A área do usuário ainda não está disponível") }
+            return false
+        }
         if (state.usuario.trim() == USUARIO_ADM && state.senha == SENHA_ADM) {
             return true
         }
