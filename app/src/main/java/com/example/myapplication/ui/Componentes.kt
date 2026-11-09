@@ -20,16 +20,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+val CorAdm = Color(0xFFC62828)
+val CorCliente = Color(0xFF1565C0)
+
 @Composable
 fun CampoTexto(
     titulo: String,
     valor: String,
     placeholder: String,
     aoAlterar: (String) -> Unit,
+    corTema: Color,
     ehSenha: Boolean = false
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(titulo, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFF009739))
+        Text(titulo, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = corTema)
         Spacer(modifier = Modifier.padding(2.dp))
         TextField(
             value = valor,
@@ -41,11 +45,11 @@ fun CampoTexto(
             modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color(0xFFF8FAF9),
-                focusedIndicatorColor = Color(0xFF009739),
+                focusedIndicatorColor = corTema,
                 unfocusedIndicatorColor = Color(0xFFE2E8F0),
                 unfocusedContainerColor = Color(0xFFF8FAF9),
                 disabledContainerColor = Color(0xFFF8FAF9),
-                cursorColor = Color(0xFF009739)
+                cursorColor = corTema
             )
         )
     }

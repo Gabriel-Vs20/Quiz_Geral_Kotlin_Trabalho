@@ -46,6 +46,7 @@ fun TelaLoginAdm(
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val corTema = if (uiState.modoAdm) CorAdm else CorCliente
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -62,7 +63,7 @@ fun TelaLoginAdm(
         ) {
 
             Box(
-                modifier = Modifier.size(70.dp).background(Color(0xFF009739), CircleShape),
+                modifier = Modifier.size(70.dp).background(corTema, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -77,7 +78,7 @@ fun TelaLoginAdm(
 
             Text(
                 "Quiz Geral",
-                color = Color(0xFF009739),
+                color = corTema,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 30.sp
             )
@@ -94,7 +95,8 @@ fun TelaLoginAdm(
                 titulo = "USUÁRIO",
                 valor = uiState.usuario,
                 placeholder = "Digite o usuário",
-                aoAlterar = { viewModel.onUsuarioChange(it) }
+                aoAlterar = { viewModel.onUsuarioChange(it) },
+                corTema = corTema
             )
 
             Spacer(modifier = Modifier.padding(7.dp))
@@ -104,6 +106,7 @@ fun TelaLoginAdm(
                 valor = uiState.senha,
                 placeholder = "Digite a senha",
                 aoAlterar = { viewModel.onSenhaChange(it) },
+                corTema = corTema,
                 ehSenha = true
             )
 
@@ -127,7 +130,7 @@ fun TelaLoginAdm(
                         }
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009739)),
+                colors = ButtonDefaults.buttonColors(containerColor = corTema),
                 modifier = Modifier.fillMaxWidth().height(55.dp),
                 shape = RoundedCornerShape(12.dp)
             ) { Text("Entrar", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp) }
@@ -136,7 +139,7 @@ fun TelaLoginAdm(
 
             OutlinedButton(
                 onClick = { viewModel.onAlternarModo() },
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF009739)),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = corTema),
                 modifier = Modifier.fillMaxWidth().height(50.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {

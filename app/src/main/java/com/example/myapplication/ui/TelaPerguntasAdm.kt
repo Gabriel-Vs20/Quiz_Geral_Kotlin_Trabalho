@@ -55,9 +55,9 @@ fun TelaPerguntasAdm(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val coresDoCampo = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = Color(0xFF009739),
-        focusedLabelColor = Color(0xFF009739),
-        cursorColor = Color(0xFF009739)
+        focusedBorderColor = CorAdm,
+        focusedLabelColor = CorAdm,
+        cursorColor = CorAdm
     )
 
     Surface(
@@ -128,7 +128,7 @@ fun TelaPerguntasAdm(
                         RadioButton(
                             selected = uiState.indiceCorreta == indice,
                             onClick = { viewModel.onCorretaChange(indice) },
-                            colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF009739)),
+                            colors = RadioButtonDefaults.colors(selectedColor = CorAdm),
                             modifier = Modifier.semantics {
                                 contentDescription = "Marcar alternativa $letra como correta"
                             }
@@ -160,7 +160,7 @@ fun TelaPerguntasAdm(
 
                 Button(
                     onClick = { viewModel.onSalvar() },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009739)),
+                    colors = ButtonDefaults.buttonColors(containerColor = CorAdm),
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     shape = RoundedCornerShape(10.dp)
                 ) { Text("Salvar", fontWeight = FontWeight.ExtraBold) }
