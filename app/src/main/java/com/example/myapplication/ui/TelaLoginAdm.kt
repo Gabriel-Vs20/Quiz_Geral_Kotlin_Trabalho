@@ -111,6 +111,11 @@ fun TelaLoginAdm(
                 CaixaErro(uiState.erro)
             }
 
+            if (uiState.sucesso.isNotBlank()) {
+                Spacer(modifier = Modifier.padding(5.dp))
+                CaixaSucesso(uiState.sucesso)
+            }
+
             Spacer(modifier = Modifier.padding(12.dp))
 
             Button(
