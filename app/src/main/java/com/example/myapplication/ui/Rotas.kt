@@ -4,5 +4,6 @@ object Rotas {
 
     const val LOGIN_ADM = "login_adm"
     const val PERGUNTAS_ADM = "perguntas_adm"
+    const val QUIZ_CLIENTE = "quiz_cliente"
 
 }

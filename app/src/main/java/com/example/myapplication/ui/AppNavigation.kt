@@ -23,6 +23,10 @@ fun AppNavigation() {
             TelaPerguntasAdm(navController)
         }
 
+        composable(Rotas.QUIZ_CLIENTE) {
+            TelaQuizCliente()
+        }
+
     }
 
 }

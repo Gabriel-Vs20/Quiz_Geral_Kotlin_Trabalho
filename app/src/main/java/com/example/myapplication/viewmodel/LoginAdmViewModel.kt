@@ -36,21 +36,16 @@ class LoginAdmViewModel : ViewModel() {
         }
     }
 
-    // devolve true quando pode entrar na área do administrador
+    // devolve true quando pode entrar na área escolhida (administrador ou cliente)
     fun onEntrar(): Boolean {
         val state = _uiState.value
-        if (!state.modoAdm) {
-            // a área do cliente ainda não existe, então o login só confirma na própria tela
-            val loginCerto = state.usuario.trim() == USUARIO_CLIENTE && state.senha == SENHA_CLIENTE
-            _uiState.update {
-                it.copy(
-                    erro = if (loginCerto) "" else "Usuário ou senha inválidos",
-                    sucesso = if (loginCerto) "Login do cliente realizado!" else ""
-                )
-            }
-            return false
+        val usuario = state.usuario.trim()
+        val loginCerto = if (state.modoAdm) {
+            usuario == USUARIO_ADM && state.senha == SENHA_ADM
+        } else {
+            usuario == USUARIO_CLIENTE && state.senha == SENHA_CLIENTE
         }
-        if (state.usuario.trim() == USUARIO_ADM && state.senha == SENHA_ADM) {
+        if (loginCerto) {
             return true
         }
         _uiState.update { it.copy(erro = "Usuário ou senha inválidos") }

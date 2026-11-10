@@ -125,7 +125,8 @@ fun TelaLoginAdm(
             Button(
                 onClick = {
                     if (viewModel.onEntrar()) {
-                        navController.navigate(Rotas.PERGUNTAS_ADM) {
+                        val destino = if (uiState.modoAdm) Rotas.PERGUNTAS_ADM else Rotas.QUIZ_CLIENTE
+                        navController.navigate(destino) {
                             popUpTo(Rotas.LOGIN_ADM) { inclusive = true }
                         }
                     }
