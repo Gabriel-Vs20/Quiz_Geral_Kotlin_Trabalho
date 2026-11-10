@@ -20,6 +20,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.myapplication.data.local.AppDatabase
 import com.example.myapplication.data.repository.PerguntaRepository
 import com.example.myapplication.data.repository.ResultadoFinalRepository
@@ -37,6 +39,7 @@ import com.example.myapplication.viewmodel.QuizClienteViewModelFactory
 
 @Composable
 fun TelaQuizCliente(
+    navController: NavHostController,
     viewModel: QuizClienteViewModel = viewModel(
         factory = QuizClienteViewModelFactory(
             PerguntaRepository(AppDatabase.getDatabase(LocalContext.current).perguntaDAO()),
@@ -48,11 +51,19 @@ fun TelaQuizCliente(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pergunta = uiState.perguntaAtual
 
+    // o jogo já foi salvo no banco, então vai para a tela de resultado
+    LaunchedEffect(uiState.finalizado) {
+        if (uiState.finalizado) {
+            navController.navigate(Rotas.resultadoCliente(uiState.acertos, uiState.perguntas.size)) {
+                popUpTo(Rotas.QUIZ_CLIENTE) { inclusive = true }
+            }
+        }
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFF4F7F6)
     ) {
-        // quando acabam as perguntas a tela fica vazia por enquanto
         if (pergunta == null) return@Surface
 
         Column(
