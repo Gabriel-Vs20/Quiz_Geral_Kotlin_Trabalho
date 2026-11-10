@@ -10,6 +10,8 @@ class PerguntaRepository(private val perguntaDao: PerguntaDAO) {
 
     fun contar(): Flow<Int> = perguntaDao.contar()
 
+    suspend fun listarTodas(): List<Pergunta> = perguntaDao.listarTodas()
+
     suspend fun inserir(pergunta: Pergunta) {
         perguntaDao.inserir(pergunta)
     }

@@ -14,4 +14,7 @@ interface PerguntaDAO {
     @Query("SELECT COUNT(*) FROM perguntas")
     fun contar(): Flow<Int>
 
+    @Query("SELECT * FROM perguntas")
+    suspend fun listarTodas(): List<Pergunta>
+
 }
