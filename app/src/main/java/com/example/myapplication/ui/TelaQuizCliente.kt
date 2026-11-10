@@ -31,6 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.data.local.AppDatabase
 import com.example.myapplication.data.repository.PerguntaRepository
+import com.example.myapplication.data.repository.ResultadoFinalRepository
 import com.example.myapplication.viewmodel.QuizClienteViewModel
 import com.example.myapplication.viewmodel.QuizClienteViewModelFactory
 
@@ -38,7 +39,8 @@ import com.example.myapplication.viewmodel.QuizClienteViewModelFactory
 fun TelaQuizCliente(
     viewModel: QuizClienteViewModel = viewModel(
         factory = QuizClienteViewModelFactory(
-            PerguntaRepository(AppDatabase.getDatabase(LocalContext.current).perguntaDAO())
+            PerguntaRepository(AppDatabase.getDatabase(LocalContext.current).perguntaDAO()),
+            ResultadoFinalRepository(AppDatabase.getDatabase(LocalContext.current).resultadoFinalDAO())
         )
     )
 ) {

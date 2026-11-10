@@ -9,7 +9,8 @@ data class QuizClienteUiState(
     val perguntas: List<Pergunta> = emptyList(),
     val indiceAtual: Int = 0,
     val respostaEscolhida: Int? = null,
-    val acertos: Int = 0
+    val acertos: Int = 0,
+    val finalizado: Boolean = false
 ) {
     val perguntaAtual: Pergunta? get() = perguntas.getOrNull(indiceAtual)
 }
